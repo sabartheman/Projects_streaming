@@ -1,0 +1,35 @@
+
+### 
+
+auto lo
+iface lo inet loopback
+
+### i do testing over wifi as well as ethernet, the debian config file for the wifi doesn't like to have a static 
+### ethernet (eth0), If I want to stream over ethernet I use a static set to 192.168.1.3  
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet manual   ### <- comment this out if uncommenting the static section
+
+###  If you take these following lines out of comment you must comment the line above that sets the eth0 to manual
+
+#iface eth0 inet static
+
+#address 192.168.1.3
+#netmask 255.255.255.0
+#gateway 192.168.1.20
+
+
+### everything below here is for the debian wifi set up if a wifi dongle is plugged into the Pi
+### if you want to manually change your wifi settings you can find them by following the path that is shown below
+
+auto wlan0
+allow-hotplug wlan0
+iface wlan0 inet manual
+wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+auto wlan1
+allow-hotplug wlan1
+iface wlan1 inet manual
+wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+
