@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+###this is just a shell script that uses the basic raspberry pi camera commands.  The tee command saves a copy of the video to where ever you called this command
+### the video that Is saved to the pi is HD mpeg, which needs to be converted for most windows machines.  I did this by using the ffmpeg tool on linux
+
+raspivid -t 0 -h 1080 -w 1920 -fps 25 -vf -b 2000000 -n -o - | tee -a test_video.h264 | cvlc stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8080/}' -vvv :demux=h264
