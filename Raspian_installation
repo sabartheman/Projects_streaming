@@ -1,0 +1,79 @@
+So, this is a instruction manual on installing a operating system on to the raspberry pi.  This is just one of 
+many ways that this process can be done.  It is just what I have found easiest to do.
+
+Step 1:
+  Aquire Raspberry pi, microSD card, and working internet connection(ethernet or wifi if you have wifi usb dongle)
+    If you dont have a 5V power supply you better get one with a micro usb cord.
+    (make sure that you have a adapter for the microSD card that can be used on a seperate computer.)
+
+Step 2:
+  Take both items out of box and make sure they look like they are not damaged.
+  
+Step 3:
+  plug microSD card adapter into your computer(not the pi) to begin installing operating system for the Pi.
+    a.  Go to https://www.raspberrypi.org/downloads/
+        This is the site to download a operating system for your Raspberry Pi.
+    b.  If you have never used a Linux OS before you should download NOOBS, otherwise download Raspian.
+        (the other operating systems are also there but most of them don't have the firmware for the raspberry pi camera.
+    c.  You should download the zip file version.  They both download at the same speed but some campuses block torrenting.
+    
+    d.  If you don't have a program to unpack the zip there are several different alternatives.
+          Windows: I use 7zip for most of my file archiving.  There is also WinZip for windows that can do the same
+            7zip   : http://www.7-zip.org/download.html
+            Winzip : http://www.winzip.com/win/en/index.htm
+            
+            You can use either or even another program, it doesn't really matter.
+            
+          Mac OS (10.6 and up): I don't use mac very much but I understand that there are a decent amount of mac users
+            There is a program that comes with the standart mac package called The Unarchiver (creative right?)
+            There is also a program called Keka which can upzip .zip files and alot of other types of archive files
+            Keka : http://www.kekaosx.com/en/
+            
+          Linux:  This a simple command that is executed in the command terminal
+            This is the command: upzip
+             unzip file.zip -d destination_folder
+             If the terminal throws a error saying that the command is undefined then you might need to install a easier operating system for your computer.
+    e.  now you should have something that looks like : (date_that_image_was_released)_raspbian_wheezy.img
+            or something that is close to this.  You should have a file that has a .img attachment
+    
+Step 4:
+  Flash image of operating system to your sd card
+      a. make sure that your microSD card is recognized on your computer when plugged in.
+          if not you need to look up the drivers for the card adapter that can be found by looking up the manufactorers website.
+      b. now you need a program or command to copy the image to the sd card.
+          Windows: there is a program that is called win32diskimager
+              this can be found at http://sourceforge.net/projects/win32diskimager/ 
+              or                   http://www.softpedia.com/get/CD-DVD-Tools/Data-CD-DVD-Burning/Win32-Disk-Imager.shtml
+              
+              (be careful in these sites, they have many fake download buttons.)
+          
+          Mac OS (10.6 and up): I'm not sure how to explain this without blantenly ripping off a reliable site that has instructions
+                  So here is the tutorial for Mac from the Raspberry pi website:
+                                    https://www.raspberrypi.org/documentation/installation/installing-images/mac.md
+                                    
+          Linux: Since there are so many different distros for unix I am going to leave it up to elinux.org to guide this part
+                http://elinux.org/RPi_Easy_SD_Card_Setup
+                This site shows multiple different ways to install onto a sd card, including another method for windows and mac
+Step 5:
+  At this point you should have the image of the operating system on the sd card.
+  You now should plug it into the raspberry pi board itself. 
+  the sd card slot is on the bottom of the board on the opposite end of the usb ports.
+  The card only fits one way and thats with the colored face of most cards facing down.
+  
+Step 6:
+  You can now plug your Pi into a power source.
+  Make sure that you only have a 5V usb source otherwise you could overvolt the power port and let some magic smoke out.
+  (Depending on what you are doing you can provide more and the current should be around 1A.)
+  When the pi boots up it will go through a set up sequence.  This window has raspi-config on the top of it.  
+  
+  If you dont go through the raspi config window when you log in you need to put into the command line 
+                                                                                sudo raspi-config
+                                                                                
+  This will guide you a setup of your operating system
+  make sure you expand sd card usage(the first option on raspi-config)
+  
+Step 7:
+  So at this point you have your raspiberry pi all set up. the rest of my documents are for setting up a wireless
+  video stream.  At this point (9/23/2015) I have all the files for 0% to 100%, If for some reason you think I don't Send me a message at skylar4494@gmail.com
+            
+            
