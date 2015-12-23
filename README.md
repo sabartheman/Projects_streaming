@@ -2,21 +2,15 @@
 Project_videostreaming
 
 
-This is just some of the code that I used to stream video from a weather balloon from ground to 95,000 ft.
+This Project is a rough summary of the Video Streaming system that was used in the MSGC Borealis 2015 Summer flights.  The kit is incomplete and there are some works in progress.
 
-We used a Ubiquiti Rocket dish with Ubiquiti M5 modems on each side
+We used a Ubiquiti Rocket dish with Ubiquiti M5 modems on each side.  The Rocket dish is set on top of a servo assembly that allows for a rotation of tilt and pan.  We currently are polling a MySQL data base for gps addresses to track.  The servo system was created by a previous Borealis member that has since moved on into industry.
 
+We stream the video to a website and have a connection to a wired ethernet connection.  This requires a wireless adapter of some kind and also a network adapter that uses a ethernet (cat5 or cat7 doesn't matter) cable to communicate with the Ubiquiti Rocket M5 Dish array.
 
-The pc side was set to static but I think dynamic will work with out too many problems.  The main one is that 
-if you want to streamout on the pc side to a computer somewhere you need to know your public IP address and 
-make sure that you are using the right video transcoder. 
+We set up the main streaming pipeline through VLC media player.  In one of the set up files ...... the method to setting up a stream to a ip is explained out in detail.
 
+To start the stream the we use a batch file to run a set of commands that are pre-defined on the Raspian operating system. 
+A short example command is shown in the Create Video_streaming_pi_side
 
-I used vlc player to do the network recieving and streaming.  There are many different ways to stream but for a cheap 
-video player that has a decent gui I found vlc to be the easiest.
-
-The video command shell just uses the Raspberry Pi's pi camera(not python) commands.  
-
-The Raspberry Pi that streams from the balloon needs to have a static IP over the ethernet port (eth0) So that the 
-Ubiquiti M5 can communicate with it.  I set mine to 192.168.1.3, this allowed me to have a constant address in case
-I needed to restart the Pi in the flight.  
+Current I am using this set up to stream video from a high altitude balloon over wifi. The Ubiquiti Dish connects to the Ubiquiti node on the balloon.  I need to know the address of the Pi when I set up the stream, so I set up the Raspberry Pi to have a static ip (there is a page of instructions for this.)
