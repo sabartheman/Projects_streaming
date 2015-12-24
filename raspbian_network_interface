@@ -1,11 +1,12 @@
+### This whole file is structured to be copied directly into /etc/network/interfaces  Setting up the network is a lot easier if you have previous experience.
+### In case something is messed up saving a copy of the old network file as backup would be a good idea.  This file was structured for rasbian (wheezy may-4th-2015)  
+### currently there is a new version of Raspbian called Jesse the interface file might be a little different from it.  I will add more to this when I am able to look into it.
 
-### 
 
 auto lo
 iface lo inet loopback
 
-### i do testing over wifi as well as ethernet, the debian config file for the wifi doesn't like to have a static 
-### ethernet (eth0), If I want to stream over ethernet I use a static set to 192.168.1.3  
+
 
 auto eth0
 allow-hotplug eth0
