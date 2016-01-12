@@ -1,7 +1,23 @@
 #!/bin/bash
 
+ 
+## The following line is a command to be used on the Raspberry Pi Operating system Raspbian.  This line is to be entered in Terminal or in a command line
+## The command does 3 things, the first part sets parameters for taking the video, 
+##  raspivid is the command to take video through the CSI port on the raspberry pi
+##  -t is a parameter to set how long the video will record for, when set to 0 the video will record for inf. time, this is limited by memory of the sd card
+##  -h and -w set the parameters of the resolution of the video.  currently the resolution that I chose the max framerate is 25, which is also set by -f
+##  -b is the data transfer rate
+##
+##  -o is to set the output of the video, this can be set to the screen but in this case I am sending it to two commands
 
-###this is just a shell script that uses the basic raspberry pi camera commands.  The tee command saves a copy of the video to where ever you called this command
-### the video that Is saved to the pi is HD mpeg, which needs to be converted for most windows machines.  I did this by using the ffmpeg tool on linux
+## | signifies a logical bitwise or  by adding a command after the command will be executed also.c
 
-raspivid -t 0 -h 1080 -w 1920 -fps 25 -vf -b 2000000 -n -o - | tee -a test_video.h264 | cvlc stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8080/}' -vvv :demux=h264
+## tee is a command that reads the input and can write to another input or output.  I use this to write video file to the directory that it was called in.  So it makes a copy of the video which I can look at after as a hard copy
+
+
+## cvlc calls up vlc player, then stream calls up a function to create a pipeline to stream the video though from the source sepcified.  rtp is just the protocal that I use to send the video data to the ground reciever and the demux at the end tells the command to encode the video into the given format. 
+## currently H264 is a very commen encoding format in video recording and it is the one that I have chosen to stream currently.  
+## If you want to see the other possibilities you can check them out at:    http://www.videolan.org/streaming-features.html 
+
+
+raspivid -t 0 -h 1080 -w 1920d -fps 25 -vf -b 2000000 -n -o - | tee -a test_video.h264 | cvlc stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8080/}' -vvv :demux=h264
