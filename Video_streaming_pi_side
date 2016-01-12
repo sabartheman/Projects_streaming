@@ -15,7 +15,9 @@
 ## tee is a command that reads the input and can write to another input or output.  I use this to write video file to the directory that it was called in.  So it makes a copy of the video which I can look at after as a hard copy
 
 
-## cvlc calls up vlc player, then stream calls up a function to create a pipeline to stream the video though from the source sepcified.  rtp is just the format that I send it through and the demux at the end sends the video out in the format of h264 
+## cvlc calls up vlc player, then stream calls up a function to create a pipeline to stream the video though from the source sepcified.  rtp is just the protocal that I use to send the video data to the ground reciever and the demux at the end tells the command to encode the video into the given format. 
+## currently H264 is a very commen encoding format in video recording and it is the one that I have chosen to stream currently.  
+## If you want to see the other possibilities you can check them out at:    http://www.videolan.org/streaming-features.html 
 
 
 raspivid -t 0 -h 1080 -w 1920d -fps 25 -vf -b 2000000 -n -o - | tee -a test_video.h264 | cvlc stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8080/}' -vvv :demux=h264
