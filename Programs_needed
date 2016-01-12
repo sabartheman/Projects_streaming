@@ -1,0 +1,35 @@
+There are a few programs required for streaming to a computer.  
+
+
+You will need some way to communicate with the raspberry pi package.  This can be accomplished in several ways.
+
+If you have set up a ssh server to run every time you start up the raspberry pi you could just ssh into the Pi.
+I usually do this so that I can manipulate the pi from my laptop/desktop.  
+
+Windows operating systems:  
+  Putty:  While it is easy to use I am partial on the gui that is given.  Currently you can download putty at: http://www.putty.org/
+          After installing putty open it up and you will see the main window for putty.
+          
+          You don't have to modify any of putty's advanced options to ssh with the Pi.
+          
+          Find out the address of your Pi by either using: ifconfig in the terminal or setting the IP to a static address.
+          Once you have the address put that into the Host Name line and make sure that the port is 22(common connection port for ssh)
+          On the connection type pick SSH, you can save these settings by clicking save at this point by make sure you name it.
+          Finally clicking open will start up a terminal-ish window that will sit there polling the IP and looking for a ssh server to connect to.
+          If there is a connection you will be asked to log into the PI.
+          
+          If you have problems connecting to your Pi
+            1. make sure that you have a ssh-server running (run sudo raspi-config and enable ssh server)
+            2. check your IP address on you Pi to make sure that you have the right address.
+            3. your firewall might be blocking the connection. check to make sure that it doesn't think it is a malicious task/program
+            4. your network security settings might be too strict, in this case if you are at home just go change them to be less strict or if you are on a campus you will need to contact IT to move past here.
+            
+          
+          At this point you can use the command that is given in the file: Video_streaming_pi_side
+          
+          raspivid -t 0 -h 1080 -w 1920d -fps 25 -vf -b 2000000 -n -o - | tee -a test_video.h264 | cvlc stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8080/}' -vvv :demux=h264
+          
+          The explanation of what this line does is in the Video_streaming_pi_side file.
+  
+  Cygwin:  This gui is a little nicer to look at and it functions as a terminal on Windows systems.  Which can come in handy if you dont want to deal with Command Prompt (cmd)
+           
