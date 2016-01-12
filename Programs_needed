@@ -1,10 +1,45 @@
 There are a few programs required for streaming to a computer.  
 
 
+You need to install VLC on both the Raspberry pi and the computer you want to stream to.  
+    To install on the Pi make sure that you have a working internet connection through either ethernet or wifi(usb wifi dongle not included)
+      1.open up terminal
+      2.type in sudo apt-get update
+        this updates the registries to update your device
+      3.if you didn't get a can't connect to server error type in: sudo apt-get install vlc
+        it will prompt you if you want to use the space to install, enter: Y
+        
+        If you did get a error saying that no connection could be established then check your internet connection by pinging a known site.
+        I usually just enter in: ping google.com   to check if I have connection.  
+        If you are sending and recieving packets then make sure that the ethernet is actually plugged into a ISP modem port or if you are on wifi make sure that your security credentials are corrent.
+      
+      4. you just have installed VLC on you PI gratse.
+      
+    To install it on your computer go to: http://www.videolan.org/vlc/
+    Then pick the install that matches your operating system, download, and install.
+    
+
+
 You will need some way to communicate with the raspberry pi package.  This can be accomplished in several ways.
 
-If you have set up a ssh server to run every time you start up the raspberry pi you could just ssh into the Pi.
-I usually do this so that I can manipulate the pi from my laptop/desktop.  
+    If you have set up a ssh server to run every time you start up the raspberry pi you could just ssh into the Pi.
+    I usually do this so that I can manipulate the pi from my laptop/desktop. This will be mentioned serveral times but you can set this up on the pi by typing in: sudo raspi-config   and enabling the ssh-server.
+
+OSX or Linux operating systems:
+  you can use the terminal to connect with your pi
+  
+  you need the address and name of the user account you want to access on the pi. 
+  Make sure that there is a ssh-server running on the pi, this can be set up through raspi-config
+  
+   1. open up terminal 
+   2. enter in the username and address in this format:  username@address -> Ex:  pi@192.168.1.2
+   3. when prompted enter in the password to the account.
+  
+  at this point you will be connected to the Pi through a ssh server connection.  
+  
+  
+   
+  
 
 Windows operating systems:  
   Putty:  While it is easy to use I am partial on the gui that is given.  Currently you can download putty at: http://www.putty.org/
@@ -32,4 +67,34 @@ Windows operating systems:
           The explanation of what this line does is in the Video_streaming_pi_side file.
   
   Cygwin:  This gui is a little nicer to look at and it functions as a terminal on Windows systems.  Which can come in handy if you dont want to deal with Command Prompt (cmd)
+           You can download this program at: https://cygwin.com/install.html
            
+           To use Cygwin you need to know the username and address of your Pi.  By default the user name of a Raspian/Noobs user account is pi
+           I would recommend changing this for security reasons.
+           The address can be found through using: ifconfig or setting it up as a static address.
+           
+           Make sure that there is a ssh server running on the raspberry pi!!
+           
+           To connect 
+            1.open up Cygwin
+            2.enter in your pi's username and address in format like this:    pi@address  -> Ex. pi@192.168.1.2
+            
+           This will start the process of connecting to your pi, if it can connect you will be prompted for the password to your pi.
+           if you connect you can enter in the command below, if not run through the troubleshooting connection list farther below
+           
+          raspivid -t 0 -h 1080 -w 1920d -fps 25 -vf -b 2000000 -n -o - | tee -a test_video.h264 | cvlc stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8080/}' -vvv :demux=h264
+          
+          
+          
+          If you have problems connecting to your Pi
+            1. make sure that you have a ssh-server running (run sudo raspi-config and enable ssh server)
+            2. check your IP address on you Pi to make sure that you have the right address.
+            3. your firewall might be blocking the connection. check to make sure that it doesn't think it is a malicious task/program
+            4. your network security settings might be too strict, in this case if you are at home just go change them to be less strict or if you are on a campus you will need to contact IT to move past here.
+            
+          
+          
+          There are other programs that you can use to connect to the pi but they usually have a remote desktop-esk feel and they take up more processing power.
+            ex: tightvnc, remina, vnc
+            
+        
